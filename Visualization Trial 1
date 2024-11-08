@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARQL Data Visualization</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        #pieChart {
+            width: 500px;
+            height: 500px;
+            margin: auto;
+        }
+        #dataList {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Nutrient Data Visualization</h1>
+    <div id="dataList"></div>
+    <div id="pieChart"></div>
+
+    <script>
+        class SPARQLQueryDispatcher {
+            constructor(endpoint) {
+                this.endpoint = endpoint;
+            }
+
+            async query(sparqlQuery) {
+                const fullUrl = this.endpoint + '?query=' + encodeURIComponent(sparqlQuery);
+                const headers = {
+                    'Accept': 'application/sparql-results+json',
+                    'User-Agent': 'MyApp/1.0 (your_email@example.com)' // Replace with your email
+                };
+
+                try {
+                    const response = await fetch(fullUrl, { headers });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                } catch (error) {
+                    console.error('Error fetching or parsing data:', error);
+                }
+            }
+        }
+
+        const endpointUrl = 'https://query.wikidata.org/sparql';
+        const sparqlQuery = `SELECT DISTINCT ?ingredient ?ingredientLabel ?calories WHERE {
+            ?food wdt:P31 wd:Q2095.
+            OPTIONAL { ?food wdt:P527 ?ingredient. }
+            OPTIONAL { ?ingredient wdt:P7971 ?calories. }
+            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+        }`;
+
+        const queryDispatcher = new SPARQLQueryDispatcher(endpointUrl);
+        
+        queryDispatcher.query(sparqlQuery).then(data => {
+            if (data && data.results && data.results.bindings.length > 0) {
+                const formattedData = data.results.bindings
+                    .map(binding => ({
+                        ingredient: binding.ingredientLabel.value,
+                        calories: parseFloat(binding.calories?.value || 0)
+                    }))
+                    .filter(d => d.calories > 0); // Filter out entries without calories
+
+                renderList(formattedData);
+                renderPieChart(formattedData);
+            } else {
+                console.log('No data received.');
+            }
+        });
+
+        function renderList(data) {
+            const dataList = d3.select("#dataList");
+            dataList.append("h2").text("Ingredients List:");
+            dataList.selectAll("p")
+                .data(data)
+                .enter()
+                .append("p")
+                .text(d => `${d.ingredient}: ${d.calories} kcal`);
+        }
+
+        function renderPieChart(data) {
+            const width = 500;
+            const height = 500;
+            const radius = Math.min(width, height) / 2;
+
+            const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            const svg = d3.select("#pieChart")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", `translate(${width / 2},${height / 2})`);
+
+            const pie = d3.pie().value(d => d.calories);
+            const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+            svg.selectAll("path")
+                .data(pie(data))
+                .enter()
+                .append("path")
+                .attr("d", arc)
+                .attr("fill", d => color(d.data.ingredient))
+                .attr("stroke", "white")
+                .style("stroke-width", "2px")
+                .append("title") // Add tooltips
+                .text(d => `${d.data.ingredient}: ${d.data.calories} kcal`);
+
+            svg.selectAll("text")
+                .data(pie(data))
+                .enter()
+                .append("text")
+                .text(d => d.data.ingredient)
+                .attr("transform", d => `translate(${arc.centroid(d)})`)
+                .style("text-anchor", "middle")
+                .style("font-size", "12px");
+        }
+    </script>
+</body>
+</html>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
