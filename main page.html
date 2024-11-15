@@ -7,21 +7,23 @@
     <style>
         .button {
             display: inline-grid;
-            padding: 50px 50px;
+            padding: 70px 70px;
             font-size: 16px;
             background-position: center;
             background-size: cover;
             border: 1px solid black;
             border-radius: 50%;
-            text-align: center;
+            text-align:center;
             text-decoration: none;
             cursor: pointer;
             margin: 40px;
+            transition: transform 0.3s ease; /* Smooth transform effect */
+            margin-top: 12px; /* Space between button and text */
         }
         
         .button:hover {
-            padding: 60px 60px;
-        }
+    transform: scale(1.15); /* Grow on hover without affecting layout */
+}
         /* Unique colors for each button */
         .button-fruit {
             background-image: url('https://wirtschaftsrevue.com/wp-content/uploads/2021/08/2-2-2-3foodgroups_fruits_detailfeature.jpg');
@@ -42,18 +44,88 @@
         .button-dairy {
             background-image: url('https://cu-website-cms-prd.s3.amazonaws.com/Milk_Products_ca4b0ea83e.jpg');
         }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the buttons horizontally */
+            align-items: center; /* Center the buttons vertically */
+            gap: 20px; /* Space between buttons */
+        }
+                /* Text styles */
+                .button-text {
+            margin-top: 6vh; /* Space between button and text */
+            font-size: 16px;
+            text-align: center;
+            color: #333;
+        }
+        .button-wrapper {
+            display: flex;
+            flex-direction: column; /* Arrange button and text vertically */
+            align-items: center; /* Center-align the text with the button */
+        }
+            
+        #section1 {
+        background-position-y: 25%;
+        background-size: cover;
+                background-image: url('https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png?sc_lang=en');
+                height: 25vh;
 
+        }
+
+        #section2 {
+            background-image: url('path/to/your/image2.jpg');
+            height:50vh;
+        }
+
+        #section3 {
+            background-position-y: 75%;
+            background-size: cover;
+            background-image: url('https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png?sc_lang=en');
+            height:25vh;
+        }
+        .title-text{
+            margin-top: 12px;
+            font:bold;
+            font-size: 32px;
+            text-align: center;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <h1>Calorie Intake Estimator</h1>
-    <h3>Click which category your food falls under:</h3>
 
-    <!-- Buttons to navigate to other pages -->
-    <a href="fruit.html" class="button button-fruit"></a>
-    <a href="vegetable.html" class="button button-veg"></a>
-    <a href="dairy.html" class="button button-dairy"></a>
-    <a href="grain.html" class="button button-grain"></a>
-    <a href="meat.html" class="button button-meat"></a>
+    <section id="section1">
+    </section>
+    <section id="section2">
+        <center><span class="title-text">chose which food catagory</span></center>
+        <div class="button-container">
+        
+            <!-- Button with text above -->
+            <div class="button-wrapper">
+                <span class="button-text">Fruit</span>
+                <a href="fruit.html" class="button button-fruit"></a>
+            </div>
+            <div class="button-wrapper">
+                <span class="button-text">Vegetable</span>
+                <a href="vegetable.html" class="button button-veg"></a>
+            </div>
+            <div class="button-wrapper">
+                <span class="button-text">Dairy</span>
+                <a href="dairy.html" class="button button-dairy"></a>
+            </div>
+            <div class="button-wrapper">
+                <span class="button-text">Grain</span>
+                <a href="grain.html" class="button button-grain"></a>
+            </div>
+            <div class="button-wrapper">
+                <span class="button-text">Meat</span>
+                <a href="meat.html" class="button button-meat"></a>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section id="section3">
+    </section>
 </body>
+</head>
 </html>
