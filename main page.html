@@ -6,29 +6,54 @@
     <title>Home Page</title>
     <style>
         .button {
-            display: inline-block;
-            padding: 10px 20px;
+            display: inline-grid;
+            padding: 50px 50px;
             font-size: 16px;
-            color: white;
-            background-color: blue;
-            border: none;
-            border-radius: 5px;
+            background-position: center;
+            background-size: cover;
+            border: 1px solid black;
+            border-radius: 50%;
             text-align: center;
             text-decoration: none;
             cursor: pointer;
-            margin: 10px;
+            margin: 40px;
         }
+        
         .button:hover {
-            background-color: darkblue;
+            padding: 60px 60px;
         }
+        /* Unique colors for each button */
+        .button-fruit {
+            background-image: url('https://wirtschaftsrevue.com/wp-content/uploads/2021/08/2-2-2-3foodgroups_fruits_detailfeature.jpg');
+        }
+
+        .button-veg {
+            background-image: url('https://cdn.britannica.com/17/196817-050-6A15DAC3/vegetables.jpg?w=400&h=300&c=crop');
+        }
+
+        .button-meat {
+            background-image: url('https://motherhoodinstyle.net/wp-content/uploads/2020/02/CHI.jpg');
+        }
+
+        .button-grain {
+            background-image: url('https://healthylifeessex.co.uk/wp-content/uploads/2021/12/shutterstock_465983252.jpg');
+        }
+
+        .button-dairy {
+            background-image: url('https://cu-website-cms-prd.s3.amazonaws.com/Milk_Products_ca4b0ea83e.jpg');
+        }
+
     </style>
 </head>
 <body>
     <h1>Calorie Intake Estimator</h1>
-    <p>Click which category your food falls under:</p>
+    <h3>Click which category your food falls under:</h3>
 
     <!-- Buttons to navigate to other pages -->
-    <a href="page1.html" class="button">Go to Page 1</a>
-    <a href="page2.html" class="button">Go to Page 2</a>
+    <a href="fruit.html" class="button button-fruit"></a>
+    <a href="vegetable.html" class="button button-veg"></a>
+    <a href="dairy.html" class="button button-dairy"></a>
+    <a href="grain.html" class="button button-grain"></a>
+    <a href="meat.html" class="button button-meat"></a>
 </body>
 </html>
