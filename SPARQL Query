@@ -1,0 +1,10 @@
+SELECT DISTINCT ?item ?itemLabel ?food_energy WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
+  {
+    SELECT DISTINCT ?item WHERE {
+      ?item p:P7971 ?statement0.
+      ?statement0 (psv:P7971/wikibase:quantityAmount) ?numericQuantity.
+    }
+  }
+{ ?item wdt:P7971 ?food_energy. }
+}
