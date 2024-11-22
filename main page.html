@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Food Categories</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         .button {
             display: inline-grid;
@@ -13,18 +14,17 @@
             background-size: cover;
             border: 1px solid black;
             border-radius: 50%;
-            text-align:center;
+            text-align: center;
             text-decoration: none;
             cursor: pointer;
             margin: 40px;
-            transition: transform 0.3s ease; /* Smooth transform effect */
-            margin-top: 12px; /* Space between button and text */
+            transition: transform 0.3s ease;
         }
-        
+
         .button:hover {
-    transform: scale(1.15); /* Grow on hover without affecting layout */
-}
-        /* Unique colors for each button */
+            transform: scale(1.15);
+        }
+
         .button-fruit {
             background-image: url('https://wirtschaftsrevue.com/wp-content/uploads/2021/08/2-2-2-3foodgroups_fruits_detailfeature.jpg');
         }
@@ -44,88 +44,330 @@
         .button-dairy {
             background-image: url('https://cu-website-cms-prd.s3.amazonaws.com/Milk_Products_ca4b0ea83e.jpg');
         }
+
         .button-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Center the buttons horizontally */
-            align-items: center; /* Center the buttons vertically */
-            gap: 20px; /* Space between buttons */
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
-                /* Text styles */
-                .button-text {
-            margin-top: 6vh; /* Space between button and text */
+
+        .button-text {
+            margin-top: 6vh;
             font-size: 16px;
             text-align: center;
             color: #333;
         }
+
         .button-wrapper {
             display: flex;
-            flex-direction: column; /* Arrange button and text vertically */
-            align-items: center; /* Center-align the text with the button */
-        }
-            
-        #section1 {
-        background-position-y: 25%;
-        background-size: cover;
-                background-image: url('https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png?sc_lang=en');
-                height: 25vh;
-
+            flex-direction: column;
+            align-items: center;
         }
 
-        #section2 {
+        #results {
+            margin: 20px auto;
+            max-width: 90%;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+
+        #results ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #results li {
+            margin: 10px 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .chart {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .label {
+            font-size: 12px;
+            fill: #000;
+        }
+
+        #top-banner {
+            background-position-y: 25%;
+            background-size: cover;
+            background-image: url('https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png?sc_lang=en');
+            height: 25vh;
+        }
+
+        #buttons {
+            margin: 20px auto;
+            max-width: 90%;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f9f9f9;
             background-image: url('path/to/your/image2.jpg');
             height:50vh;
         }
 
-        #section3 {
+        #charts {
+            margin: 20px auto;
+            max-width: 90%;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f9f9f9;
             background-position-y: 75%;
             background-size: cover;
-            background-image: url('https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png?sc_lang=en');
-            height:25vh;
+            background-image: url('');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            text-align: center; /* Center text inside section */
         }
-        .title-text{
+
+        .chart-container {
+            width: 80%;  /* Adjust width of the chart container */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chart {
+            margin-top: 20px;
+        }
+
+        .total-calories {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .title-text {
             margin-top: 12px;
             font:bold;
             font-size: 32px;
             text-align: center;
             color: #333;
         }
+        #search-bar {
+            margin-bottom: 20px;
+            padding: 5px;
+            font-size: 14px;
+            width: 200px;
+        }
+
+        #deselect-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #deselect-btn:hover {
+            background-color: #e53935;
+        }
     </style>
 </head>
 <body>
 
-    <section id="section1">
-    </section>
-    <section id="section2">
-        <center><span class="title-text">chose which food catagory</span></center>
-        <div class="button-container">
-        
-            <!-- Button with text above -->
-            <div class="button-wrapper">
-                <span class="button-text">Fruit</span>
-                <a href="fruit.html" class="button button-fruit"></a>
-            </div>
-            <div class="button-wrapper">
-                <span class="button-text">Vegetable</span>
-                <a href="vegetable.html" class="button button-veg"></a>
-            </div>
-            <div class="button-wrapper">
-                <span class="button-text">Dairy</span>
-                <a href="dairy.html" class="button button-dairy"></a>
-            </div>
-            <div class="button-wrapper">
-                <span class="button-text">Grain</span>
-                <a href="grain.html" class="button button-grain"></a>
-            </div>
-            <div class="button-wrapper">
-                <span class="button-text">Meat</span>
-                <a href="meat.html" class="button button-meat"></a>
-            </div>
+<section id="top-banner">
+
+</section>
+
+<section id="buttons">
+    <center><span class="title-text">Choose a Food Category</span></center>
+    <div class="button-container">
+        <div class="button-wrapper">
+            <span class="button-text">Fruit</span>
+            <div class="button button-fruit" onclick="filterData('fruit')"></div>
         </div>
+        <div class="button-wrapper">
+            <span class="button-text">Vegetable</span>
+            <div class="button button-veg" onclick="filterData('vegetable')"></div>
         </div>
-    </section>
-    <section id="section3">
-    </section>
+        <div class="button-wrapper">
+            <span class="button-text">Dairy</span>
+            <div class="button button-dairy" onclick="filterData('dairy')"></div>
+        </div>
+        <div class="button-wrapper">
+            <span class="button-text">Grain</span>
+            <div class="button button-grain" onclick="filterData('grain')"></div>
+        </div>
+        <div class="button-wrapper">
+            <span class="button-text">Meat</span>
+            <div class="button button-meat" onclick="filterData('meat')"></div>
+        </div>
+    </div>
+</section>
+
+<section id="results">
+    <center><input type="text" id="search-bar" placeholder="Search for food..." onkeyup="filterList()"><center>
+    <center><h2>select what food items you want to eat in this catagory</h2><center>
+    <ul id="data-list"></ul>
+    <button id="deselect-btn" onclick="deselectAll()">Deselect All</button>
+</section>
+
+<section id="charts" class="chart">
+    <div class="chart-container">
+        <div id="total-calories" class="total-calories">Total Calories: 0</div>
+        <h2>Calorie chart</h2>
+        <svg id="bar-chart" width="500" height="400"></svg>
+    </div>
+</section>
+
+<script>
+    // Mock SPARQL query results
+    const data = [
+        { name: "Apple", category: "fruit", calories: 95 },
+        { name: "Carrot", category: "vegetable", calories: 25 },
+        { name: "Milk", category: "dairy", calories: 42 },
+        { name: "Rice", category: "grain", calories: 130 },
+        { name: "Chicken", category: "meat", calories: 239 },
+        { name: "Banana", category: "fruit", calories: 105 },
+        { name: "Cheese", category: "dairy", calories: 113 },
+        { name: "Beef", category: "meat", calories: 250 }
+    ];
+
+    let selectedItems = [];
+    const svg = d3.select("#bar-chart");
+    const margin = { top: 20, right: 20, bottom: 100, left: 100 };
+    const width = 400 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    const chartGroup = svg.append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    const xScale = d3.scaleBand()
+        .range([0, width])
+        .domain(["Cumulative Calories"])
+        .padding(0.2);
+
+    const yScale = d3.scaleLinear()
+        .range([height, 0]);
+
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    const xAxisGroup = chartGroup.append("g")
+        .attr("transform", `translate(0, ${height})`);
+
+    const yAxisGroup = chartGroup.append("g");
+
+
+    function renderBarChart() {
+        let cumulative = 0;
+        const data = selectedItems.map(item => {
+            const start = cumulative;
+            cumulative += item.calories;
+            return { ...item, start, end: cumulative };
+        });
+
+        const totalCalories = selectedItems.reduce((sum, item) => sum + item.calories, 0);
+        document.getElementById("total-calories").textContent = `Total Calories: ${totalCalories}`;
+
+
+        yScale.domain([0, Math.max(cumulative, 500)]);
+
+        // Update bar segments
+        const bars = chartGroup.selectAll(".bar")
+            .data(data);
+
+        bars.enter()
+            .append("rect")
+            .attr("class", "bar")
+            .merge(bars)
+            .attr("x", xScale("Cumulative Calories"))
+            .attr("y", d => yScale(d.end))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => yScale(d.start) - yScale(d.end))
+            .attr("fill", d => color(d.name));
+
+        // Add labels next to the bars
+        const labels = chartGroup.selectAll(".label")
+            .data(data);
+
+        labels.enter()
+            .append("text")
+            .attr("class", "label")
+            .merge(labels)
+            .attr("x", width + 10) // Position label slightly to the right of the bars
+            .attr("y", d => yScale(d.end) + (yScale(d.start) - yScale(d.end)) / 2)
+            .text(d => `${d.name} (${d.calories} cal)`);
+
+        bars.exit().remove();
+        labels.exit().remove();
+
+        xAxisGroup.call(d3.axisBottom(xScale));
+        yAxisGroup.call(d3.axisLeft(yScale).ticks(5));  
+    }
+    renderBarChart();
+
+function renderFoodList(filteredData) {
+    const list = document.getElementById("data-list");
+    list.innerHTML = "";
+    filteredData.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item.name;
+        li.onclick = () => toggleSelection(item);
+        list.appendChild(li);
+    });
+}
+
+// Toggle food item selection
+function toggleSelection(item) {
+    const index = selectedItems.findIndex(selectedItem => selectedItem.name === item.name);
+    if (index === -1) {
+        selectedItems.push(item);
+    } else {
+        selectedItems.splice(index, 1);
+    }
+    renderBarChart();
+}
+
+// Filter data based on category
+function filterData(category) {
+    const filteredData = data.filter(item => item.category === category);
+    renderFoodList(filteredData);
+}
+
+// Filter the food list based on search input
+function filterList() {
+    const searchTerm = document.getElementById("search-bar").value.toLowerCase();
+    const filteredData = data.filter(item => item.name.toLowerCase().includes(searchTerm));
+    renderFoodList(filteredData);
+
+    if (searchTerm === "") {
+        clearResults(); // Clear results when search bar is empty
+}
+}
+
+// Deselect all selected items
+function deselectAll() {
+    selectedItems = [];
+    renderBarChart();
+    document.getElementById("search-bar").value = "";
+    renderFoodList(data);
+    clearResults();
+}
+// Clear results section
+function clearResults() {
+    const list = document.getElementById("data-list");
+    list.innerHTML = "";  // Clear the list of items
+}
+// Initialize food list
+renderFoodList(data);
+</script>
 </body>
-</head>
 </html>
+
+
