@@ -410,8 +410,44 @@
     // Filter the food list based on search input
     function filterList() {
         const searchTerm = document.getElementById("search-bar").value.toLowerCase();
+        const list = document.getElementById("data-list");
+        
+        // Clear the existing list before adding new items
+        list.innerHTML = "";
+        
+        // If the search term is empty, clear the list (i.e., don't display anything)
+        if (searchTerm === "") {
+            return; // Do nothing and leave the list empty
+        }
+    
+        // Filter data based on search term
         const filteredData = sparqlData.filter(item => item.name.toLowerCase().includes(searchTerm));
-        renderFoodList(filteredData);
+    
+        // If no items match the search term, don't display anything
+        if (filteredData.length === 0) {
+            return; // Do nothing, keep the list empty
+        }
+    
+        // Sort the filtered data alphabetically by the food name
+        filteredData.sort((a, b) => a.name.localeCompare(b.name));
+    
+        // Remove duplicates by using a Set to track already added items
+        const seen = new Set();
+        const uniqueData = filteredData.filter(item => {
+            if (seen.has(item.name)) {
+                return false; // Skip if the item has already been added
+            }
+            seen.add(item.name);
+            return true; // Include the item if it hasn't been added yet
+        });
+    
+        // Create and append list items for each unique food item
+        uniqueData.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item.name;
+            li.onclick = () => toggleSelection(item); // Toggle selection of items
+            list.appendChild(li);
+        });
     }
 
     // Deselect all selected items
