@@ -128,7 +128,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 70vh;
+            height: 80vh;
             text-align: center; /* Center text inside section */
         }
 
@@ -237,7 +237,7 @@
 
 <section id="results">
     <center><input type="text" id="search-bar" placeholder="Search for food..." onkeyup="filterList()"><center>
-    <center><h2>select what food items you want to eat in this catagory</h2><center>
+    <center><h2>Select what food items you want to eat in this catagory</h2><center>
     <ul id="data-list"></ul>
     <button id="deselect-btn" onclick="deselectAll()">Deselect All</button>
 </section>
@@ -246,7 +246,7 @@
     <div class="chart-container">
         <div id="total-calories" class="total-calories">Total Calories: 0</div>
         <h2>Calorie chart</h2>
-        <svg id="bar-chart" width="500" height="400"></svg>
+        <svg id="bar-chart" width="500" height="500"></svg>
     </div>
 </section>
 
@@ -275,19 +275,24 @@
                     calories: parseInt(item.foodEnergy.value) || 0, // Handle missing calories
                 };
             });
-            console.log(sparqlData); // Log the processed data
+
             return sparqlData; // Return sparqlData
         } catch (error) {
             console.error("Error fetching data from SPARQL endpoint", error);
         }
     }
+    // Call renderBarChart to initialize the chart with empty data
+    fetchData().then(data => {
+    sparqlData = data;
+    renderBarChart(); 
+});
 
     // Initialize the chart and data
     let selectedItems = [];
     const svg = d3.select("#bar-chart");
     const margin = { top: 20, right: 20, bottom: 100, left: 100 };
     const width = 400 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const height = 500 - margin.top - margin.bottom;
 
     const chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
