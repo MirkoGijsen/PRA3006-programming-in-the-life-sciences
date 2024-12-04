@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Categories</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         .button {
             display: inline-grid;
@@ -12,7 +8,7 @@
             font-size: 16px;
             background-position: center;
             background-size: cover;
-            border: 1px solid black;
+            border: 1px solid rgb(0, 0, 0);
             border-radius: 50%;
             text-align: center;
             text-decoration: none;
@@ -98,21 +94,10 @@
         }
 
         #top-banner {
-            background-position-y: 25%;
+            background-position-y: 50%;
             background-size: cover;
             background-image: url('https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png?sc_lang=en');
             height: 25vh;
-        }
-
-        #buttons {
-            margin: 20px auto;
-            max-width: 90%;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            background: #f9f9f9;
-            background-image: url('path/to/your/image2.jpg');
-            height:50vh;
         }
 
         #charts {
@@ -202,12 +187,8 @@
             transform: scale(1.1); /* Scale up when hovering over the item */
         }
     </style>
-</head>
-<body>
 
-<section id="top-banner">
-
-</section>
+<section id="top-banner"></section>
 
 <section id="buttons">
     <center><span class="title-text">Choose a Food Category</span></center>
@@ -291,7 +272,7 @@
     let selectedItems = [];
     const svg = d3.select("#bar-chart");
     const margin = { top: 20, right: 20, bottom: 100, left: 100 };
-    const width = 400 - margin.left - margin.right;
+    const width = 350 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
     const chartGroup = svg.append("g")
@@ -322,9 +303,9 @@
         });
 
         const totalCalories = selectedItems.reduce((sum, item) => sum + item.calories, 0);
-        document.getElementById("total-calories").textContent = `Total Calories: ${totalCalories}`;
+        document.getElementById("total-calories").textContent = `Total Calories: ${totalCalories}`;2289
 
-        yScale.domain([0, Math.max(cumulative, 500)]);
+        yScale.domain([0, Math.max(cumulative, 2000)]);
 
         // Update bar segments
         const bars = chartGroup.selectAll(".bar")
@@ -411,26 +392,26 @@
     function filterList() {
         const searchTerm = document.getElementById("search-bar").value.toLowerCase();
         const list = document.getElementById("data-list");
-        
+
         // Clear the existing list before adding new items
         list.innerHTML = "";
-        
+
         // If the search term is empty, clear the list (i.e., don't display anything)
         if (searchTerm === "") {
             return; // Do nothing and leave the list empty
         }
-    
+
         // Filter data based on search term
         const filteredData = sparqlData.filter(item => item.name.toLowerCase().includes(searchTerm));
-    
+
         // If no items match the search term, don't display anything
         if (filteredData.length === 0) {
             return; // Do nothing, keep the list empty
         }
-    
+
         // Sort the filtered data alphabetically by the food name
         filteredData.sort((a, b) => a.name.localeCompare(b.name));
-    
+
         // Remove duplicates by using a Set to track already added items
         const seen = new Set();
         const uniqueData = filteredData.filter(item => {
@@ -440,7 +421,7 @@
             seen.add(item.name);
             return true; // Include the item if it hasn't been added yet
         });
-    
+
         // Create and append list items for each unique food item
         uniqueData.forEach(item => {
             const li = document.createElement("li");
