@@ -1,6 +1,6 @@
-SELECT DISTINCT ?item ?itemLabel ?subclassOf ?subclassOfLabel ?foodEnergy WHERE {
-  ?item p:P7971 ?statement0.
-  ?statement0 ps:P7971 ?foodEnergy.
-  { ?item wdt:P279 ?subclassOf. }
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
-}
+   SELECT DISTINCT ?item ?itemLabel ?subclassOf ?subclassOfLabel ?foodEnergy WHERE {
+        ?item p:P7971 ?statement0.
+        ?statement0 ps:P7971 ?foodEnergy.
+        OPTIONAL { ?item wdt:P279 ?subclassOf. }
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+    }
