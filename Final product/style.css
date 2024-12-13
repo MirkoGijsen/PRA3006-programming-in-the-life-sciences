@@ -1,0 +1,184 @@
+.button {
+    display: inline-grid;
+    padding: 70px 70px;
+    font-size: 16px;
+    background-position: center;
+    background-size: cover;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 40px;
+    transition: transform 0.3s ease;
+}
+
+.button:hover {
+    transform: scale(1.15);
+}
+
+.button-fruit {
+    background-image: url('https://wirtschaftsrevue.com/wp-content/uploads/2021/08/2-2-2-3foodgroups_fruits_detailfeature.jpg');
+}
+
+.button-veg {
+    background-image: url('https://cdn.britannica.com/17/196817-050-6A15DAC3/vegetables.jpg?w=400&h=300&c=crop');
+}
+
+.button-meat {
+    background-image: url('https://motherhoodinstyle.net/wp-content/uploads/2020/02/CHI.jpg');
+}
+
+.button-grain {
+    background-image: url('https://healthylifeessex.co.uk/wp-content/uploads/2021/12/shutterstock_465983252.jpg');
+}
+
+.button-dairy {
+    background-image: url('https://cu-website-cms-prd.s3.amazonaws.com/Milk_Products_ca4b0ea83e.jpg');
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0,5vw;
+}
+
+.button-text {
+    margin-top: 6vh;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#results {
+    margin: 20px auto;
+    max-width: 90%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+#results ul {
+    list-style: none;
+    padding: 0;
+}
+
+#results li {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.chart {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.label {
+    font-size: 12px;
+    fill: #000;
+}
+
+#top-banner {
+    background-position-y: 50%;
+    background-size: cover;
+    background-image: url('https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png?sc_lang=en');
+    height: 25vh;
+}
+
+#charts {
+    margin: 20px auto;
+    max-width: 90%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    background-position-y: 75%;
+    background-size: cover;
+    background-image: url('');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center; /* Center text inside section */
+}
+
+.chart-container {
+    width: 80%;  /* Adjust width of the chart container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart {
+    margin-top: 20px;
+}
+
+.total-calories {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.title-text {
+    margin-top: 12px;
+    font:bold;
+    font-size: 32px;
+    text-align: center;
+    color: #333;
+}
+#search-bar {
+    margin-bottom: 20px;
+    padding: 5px;
+    font-size: 14px;
+    width: 200px;
+}
+
+#deselect-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#deselect-btn:hover {
+    background-color: #e53935;
+}
+/* Style the food list to display horizontally and wrap */
+#data-list {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to move to the next line */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Space between items */
+    margin-top: 20px;
+}
+
+#data-list li {
+    list-style: none;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px; /* Set a fixed width for the list items */
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+#data-list li:hover {
+    transform: scale(1.1); /* Scale up when hovering over the item */
+}
