@@ -1,7 +1,5 @@
  Food Item Calorie Calculator
 
-Rubric: what we need: comes with a README, AUTHORS, LICENSE file, and has a greatly detailed documentation in the source code
-
 Authors: Michael Fields, Mirko Gijsen, Maria Soto Losada
 License File: 
 
