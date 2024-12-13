@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<head>
+    <link rel="stylesheet" href="style food website.css">
+    </head>
+<style food website.css></style>
+
+<section id="top-banner"></section>
+
+<section id="buttons">
+    <center><span class="title-text">Choose a Food Category</span></center>
+    <div class="button-container">
+        <div class="button-wrapper">
+            <span class="button-text">Fruits</span>
+            <div class="button button-fruit" onclick="filterData('fruit')"></div>
+        </div>
+        <div class="button-wrapper">
+            <span class="button-text">Vegetables</span>
+            <div class="button button-veg" onclick="filterData('vegetable')"></div>
+        </div>
+        <div class="button-wrapper">
+            <span class="button-text">Dairy</span>
+            <div class="button button-dairy" onclick="filterData('dairy')"></div>
+        </div>
+        <div class="button-wrapper">
+            <span class="button-text">Nuts/Grains</span>
+            <div class="button button-grain" onclick="filterData('seed')"></div>
+        </div>
+        <div class="button-wrapper">
+            <span class="button-text">meat</span>
+            <div class="button button-meat" onclick="filterData('meat')"></div>
+        </div>
+    </div>
+</section>
+
+<section id="results">
+    <center><input type="text" id="search-bar" placeholder="Search for food..." onkeyup="filterList()"><center>
+    <center><h2>Select what food items you want to eat in this catagory</h2><center>
+    <ul id="data-list"></ul>
+    <button id="deselect-btn" onclick="deselectAll()">Deselect All</button>
+</section>
+
+<section id="charts" class="chart">
+    <div class="chart-container">
+        <div id="total-calories" class="total-calories">Total Calories: 0</div>
+        <h2>Calorie chart</h2>
+        <svg id="bar-chart" width="500" height="500"></svg>
+    </div>
+</section>
+
+<script type="text/javascript" src="script food website.js"></script>
+</body>
+</html>
